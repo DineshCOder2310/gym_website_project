@@ -1,0 +1,94 @@
+gemini connectinvity if error occured
+npm install dotenv
+npm install @google/generative-ai
+
+npm install axios
+
+
+npm install express body-parser mysql
+
+https://fdc.nal.usda.gov/api-key-signup.html
+
+CREATE TABLE users (
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE personal_details (
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    gender VARCHAR(10) NOT NULL,
+    phone VARCHAR(15) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    dob DATE NOT NULL,
+    address TEXT NOT NULL,
+    weight FLOAT NOT NULL,
+    height FLOAT NOT NULL,
+    bloodGroup VARCHAR(5) NOT NULL,
+    medicalInjuries TEXT,
+    fitnessGoals TEXT,
+    user_id INT,
+    FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
+CREATE TABLE meditation_records (
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    date DATE NOT NULL,
+    session_type VARCHAR(255),
+    duration INT NOT NULL,
+    notes TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
+CREATE TABLE fitness_records (
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    date DATE NOT NULL,
+    exercise VARCHAR(255) NOT NULL,
+    duration INT NOT NULL,
+    calories_burned INT NOT NULL,
+    notes TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
+CREATE TABLE diet_records (
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    date DATE NOT NULL,
+    breakfast VARCHAR(255),
+    breakfast_calories INT,
+    lunch VARCHAR(255),
+    lunch_calories INT,
+    dinner VARCHAR(255),
+    dinner_calories INT,
+    snacks VARCHAR(255),
+    snacks_calories INT,
+    hydration_goal FLOAT,
+    hydration_actual FLOAT,
+    protein INT,
+    fats INT,
+    carbs INT,
+    calories_burned INT,
+    mood VARCHAR(255),
+    energy VARCHAR(255),
+    total_calories INT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
+CREATE TABLE cardio_records (
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    date DATE NOT NULL,
+    duration INT NOT NULL,
+    distance FLOAT,
+    calories_burned INT,
+    notes TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id)
+);
